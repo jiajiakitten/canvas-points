@@ -65,14 +65,14 @@ html,body,p
     width: 12.86rem;
     margin-top:1.96rem;
 }
-#fullPage-nav {
+#fp-nav  {
     top: 75%;
 }
-#fullPage-nav.left {
+#fp-nav .left {
     left: 0.58rem;
 }
 
-#fullPage-nav span, .fullPage-slidesNav span{
+#fp-nav ul li a span, .fp-slidesNav ul li a span{
     top: 2px;
     left: 2px;
     width: 3px;
@@ -85,11 +85,12 @@ html,body,p
     position: absolute;
     z-index: 1;
 }
-#fullPage-nav li .active span, .fullPage-slidesNav .active span{
+
+#fp-nav ul li a.active span, .fp-slidesNav ul li a.active span{
     background: #fff;
 }
 
-#fullPage-nav li .active span::before, .fullPage-slidesNav .active span::before{
+#fp-nav ul li a.active span::before, .fp-slidesNav ul li a.active span::before{
     background: #fff;
     content: '';
     display: inline-block;
@@ -97,7 +98,7 @@ html,body,p
     height: 1px;
     position: absolute;
     left: -0.7rem;
-    top: 0.01rem;
+    top: 0.02rem;
 }
 #canvas{
     position: fixed;

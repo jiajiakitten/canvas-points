@@ -1,13 +1,10 @@
-function drawimg() {
+function drawPics(imgObj, index) {
     var canvas = document.getElementById("canvas");
     canvas.width = document.documentElement.clientWidth;
     canvas.height = document.documentElement.clientHeight;
     var context = canvas.getContext('2d');
-    focallength = 250;
+    focallength = 350;
     var derection = true;
-    var imgObj = new Image();
-    imgObj.src = "./image/2/building.png";
-
     var dots = [];
     var Dot = function (centerX, centerY, centerZ, radius) {
         this.dx = centerX;
@@ -27,7 +24,7 @@ function drawimg() {
             context.beginPath();
             var scale = focallength / (focallength + this.z);
             context.arc(canvas.width / 2 + (this.x - canvas.width / 2) * scale, canvas.height / 2 + (this.y - canvas.height / 2) * scale, this.radius * scale, 0, 2 * Math.PI);
-            context.fillStyle = "rgba(50,50,50," + scale + ")";
+            context.fillStyle = "rgba(250,250,250," + scale + ")";
             context.fill();
             context.restore();
         }
@@ -37,19 +34,47 @@ function drawimg() {
             callback.call(this[i]);
         }
     }
-    console.log(Dot);
-    drawImg(imgObj);
-
-    function drawImg(imgObj) {
-        context.save()
+    drawImg(imgObj, index);
+    function drawImg(imgObj, index) {
+        console.log(imgObj, index, 'imgObj');
+        context.save();
+        var distance = 1;
         imgObj.onload = function(){
-            context.drawImage(imgObj, 0, 0, imgObj.width, imgObj.height, 0, canvas.height / 2.4, imgObj.width / 2, imgObj.height / 2);
-            dots = getimgData(imgObj);
+            switch (index) {
+                case 1:
+                    context.drawImage(imgObj, 0, 0, imgObj.width, imgObj.height, 0, canvas.height / 2.4, imgObj.width / 2, imgObj.height / 2);
+                    break;
+                case 2:
+                    distance = 4;
+                    context.drawImage(imgObj, 0, canvas.height - imgObj.height / 2, imgObj.width / 2, imgObj.height / 2);
+                    break;
+                case 3:
+                    distance = 1;
+                    context.drawImage(imgObj, canvas.width - imgObj.width / 1.3, canvas.height - imgObj.height / 1.3, imgObj.width / 1.3, imgObj.height / 1.3);
+                    break;
+                default:
+                    break;
+            }
+            dots = getimgData(imgObj, distance);
             console.log(dots);
             initAnimate();
-            // context.drawImage(this, 0, 0, canvas.height * 2 / 3, canvas.width / 2);
-        }
+        };
         context.restore();
+    }
+    function getimgData(imgObj, distance) {
+        var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        var dots = [];
+        for (var x = 0; x < imgData.width; x += distance) {
+            for (var y = 0; y < imgData.height; y += distance) {
+                var i = (y * imgData.width + x) * 4;
+                if (imgData.data[i] >= 103) {
+                    var dot = new Dot(x - 3, y - 3, 0, 1);
+                    dots.push(dot);
+                }
+            }
+        }
+        return dots;
     }
 
     function initAnimate() {
@@ -111,21 +136,6 @@ function drawimg() {
             }
 
     }
-    function getimgData(imgObj) {
-        var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
-        // context.clearRect(0, 0, canvas.width, canvas.height);
-        var dots = [];
-        for (var x = 0; x < imgData.width; x += 4) {
-            for (var y = 0; y < imgData.height; y += 4) {
-                var i = (y * imgData.width + x) * 4;
-                if (imgData.data[i] >= 128) {
-                    var dot = new Dot(x - 3, y - 3, 0, 3);
-                    dots.push(dot);
-                }
-            }
-        }
-        return dots;
-    }
+
 
 }
-drawimg();

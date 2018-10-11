@@ -68,6 +68,7 @@
 <canvas id="canvas" >浏览器不支持canvas</canvas>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
+<script src="js/canvas.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#fullpage').fullpage({
@@ -75,9 +76,18 @@
 			anchors: ['page_1', 'page_2', 'page_3'],
 			autoScrolling:true,
 			scrollHorizontally: true,
+            navigation: true,
+            navigationColor: '#fff',
+            navigationPosition: 'left'
+
 		});
+        var imgObj2 = new Image();
+        imgObj2.src = "./image/2/building.png";
+
+        var imgObj3 = new Image();
+        imgObj3.src = "./image/3/bottle.png";
+        drawPics(imgObj3, 3);
 	});
 </script>
-<script src="js/canvas.js"></script>
 </body>
 </html>
