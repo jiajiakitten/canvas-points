@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<!-- saved from url=(0024)http://signxin.com/docs/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="keywords" content="three.js,three.js中文文档,three.js API,沙因Sign">
+		<meta name="description" content="three.js中文文档API。">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<title>three.js / 文档</title>
+		<style>
+
+			@font-face {
+				font-family: 'inconsolata';
+				src: url('files/inconsolata.woff') format('woff');
+				font-weight: normal;
+				font-style: normal;
+			}
+
+			*{
+				box-sizing: border-box;
+			}
+
+			html {
+				height: 100%;
+			}
+
+			body {
+				background-color: #ffffff;
+				margin: 0px;
+				height: 100%;
+				color: #555;
+				font-family: 'inconsolata',"微软雅黑",Monaco,"Lucida Sans",Arial;;
+				font-size: 15px;
+				line-height: 18px;
+				overflow: hidden;
+			}
+
+				h1 {
+					margin-top: 30px;
+					margin-bottom: 40px;
+					margin-left: 20px;
+					font-size: 25px;
+					font-weight: normal;
+				}
+
+				h2 {
+					color: #454545;
+					font-size: 18px;
+					font-weight: normal;
+
+					margin-top: 20px;
+					margin-left: 20px;
+				}
+
+				h3 {
+					color: #666;
+					font-size: 16px;
+					font-weight: normal;
+
+					margin-top: 20px;
+					margin-left: 20px;
+				}
+
+			a {
+				color: #2194CE;
+				text-decoration: none;
+			}
+
+			#panel {
+				position: fixed;
+				left: 0px;
+				width: 260px;
+				height: 100%;
+				overflow: auto;
+				background: #fafafa;
+			}
+
+				#panel ul {
+					list-style-type: none;
+					padding: 0px;
+					margin-left: 20px;
+				}
+
+			#viewer {
+				position: absolute;
+				border: 0px;
+				left: 260px;
+				width: calc(100% - 260px);
+				height: 100%;
+				overflow: auto;
+			}
+
+			.filterBlock{
+				margin: 20px;
+				position: relative;
+			}
+			.filterBlock p {
+				margin: 0;
+			}
+
+			#filterInput {
+				width: 100%;
+				padding: 5px;
+				font-family: inherit;
+				font-size: 15px;
+				outline: none;
+				border: 1px solid #dedede;
+			}
+
+			#filterInput:focus{
+				border: 1px solid #2194CE;
+			}
+
+			#clearFilterButton {
+				position: absolute;
+				right: 6px;
+				top: 50%;
+				margin-top: -8px;
+				width: 16px;
+				height: 16px;
+				font-size: 14px;
+				color: grey;
+				text-align: center;
+				line-height: 0;
+				padding-top: 7px;
+				opacity: .5;
+			}
+
+			#clearFilterButton:hover {
+				opacity: 1;
+			}
+
+			.filtered {
+				display: none;
+			}
+
+			#panel li b {
+				font-weight: bold;
+			}
+
+			/* mobile */
+
+			#expandButton {
+				display: none;
+				position: absolute;
+				right: 20px;
+				top: 12px;
+				width: 32px;
+				height: 32px;
+			}
+
+				#expandButton span {
+					height: 2px;
+					background-color: #2194CE;
+					width: 16px;
+					position: absolute;
+					left: 8px;
+					top: 10px;
+				}
+
+				#expandButton span:nth-child(1) {
+					top: 16px;
+				}
+
+				#expandButton span:nth-child(2) {
+					top: 22px;
+				}
+
+			@media all and ( max-width: 640px ) {
+				h1{
+					margin-top: 20px;
+					margin-bottom: 20px;
+				}
+				#panel{
+					position: absolute;
+					left: 0;
+					top: 0;
+					height: 480px;
+					width: 100%;
+					right: 0;
+					z-index: 100;
+					overflow: hidden;
+					border-bottom: 1px solid #dedede;
+				}
+				#content{
+					position: absolute;
+					left: 0;
+					top: 90px;
+					right: 0;
+					bottom: 0;
+					font-size: 17px;
+					line-height: 22px;
+					overflow: auto;
+				}
+				#viewer{
+					position: absolute;
+					left: 0;
+					top: 56px;
+					width: 100%;
+					height: calc(100% - 56px);
+				}
+				#expandButton{
+					display: block;
+				}
+				#panel.collapsed{
+					height: 56px;
+				}
+			}
+		</style>
+	</head>
+	<body cz-shortcut-listen="true">
+
+		<div id="panel" class="collapsed">
+			<h1><a href="http://threejs.org/">three.js</a> / 文档</h1>
+			<a id="expandButton" href="http://signxin.com/docs/#">
+				<span></span>
+				<span></span>
+				<span></span>
+			</a>
+			<div class="filterBlock">
+				<input type="text" id="filterInput" placeholder="搜索">
+				<a href="http://signxin.com/docs/#" id="clearFilterButton">x</a>
+			</div>
+			
+		<div id="content"><h2>手册</h2><div><h3>介绍</h3><ul><li><a href="http://signxin.com/docs/#">创建场景</a></li><li><a href="http://signxin.com/docs/#">矩阵变换</a></li></ul></div><h2>参考</h2><div><h3>常量</h3><ul><li><a href="http://signxin.com/docs/#">CustomBlendingEquation</a></li><li><a href="http://signxin.com/docs/#">GLState</a></li><li><a href="http://signxin.com/docs/#">Materials</a></li><li><a href="http://signxin.com/docs/#">ShadowingTypes</a></li><li><a href="http://signxin.com/docs/#">Textures</a></li></ul></div><div><h3>相机</h3><ul><li><a href="http://signxin.com/docs/#">Camera</a></li><li><a href="http://signxin.com/docs/#">CubeCamera</a></li><li><a href="http://signxin.com/docs/#">OrthographicCamera</a></li><li><a href="http://signxin.com/docs/#">PerspectiveCamera</a></li></ul></div><div><h3>核心</h3><ul><li><a href="http://signxin.com/docs/#">BufferAttribute</a></li><li><a href="http://signxin.com/docs/#">BufferGeometry</a></li><li><a href="http://signxin.com/docs/#">Clock</a></li><li><a href="http://signxin.com/docs/#">EventDispatcher</a></li><li><a href="http://signxin.com/docs/#">Face3</a></li><li><a href="http://signxin.com/docs/#">Geometry</a></li><li><a href="http://signxin.com/docs/#">Object3D</a></li><li><a href="http://signxin.com/docs/#">Raycaster</a></li></ul></div><div><h3>光源</h3><ul><li><a href="http://signxin.com/docs/#">AmbientLight</a></li><li><a href="http://signxin.com/docs/#">DirectionalLight</a></li><li><a href="http://signxin.com/docs/#">HemisphereLight</a></li><li><a href="http://signxin.com/docs/#">Light</a></li><li><a href="http://signxin.com/docs/#">PointLight</a></li><li><a href="http://signxin.com/docs/#">SpotLight</a></li></ul></div><div><h3>加载器</h3><ul><li><a href="http://signxin.com/docs/#">BabylonLoader</a></li><li><a href="http://signxin.com/docs/#">BufferGeometryLoader</a></li><li><a href="http://signxin.com/docs/#">Cache</a></li><li><a href="http://signxin.com/docs/#">ColladaLoader</a></li><li><a href="http://signxin.com/docs/#">glTFLoader</a></li><li><a href="http://signxin.com/docs/#">ImageLoader</a></li><li><a href="http://signxin.com/docs/#">JSONLoader</a></li><li><a href="http://signxin.com/docs/#">Loader</a></li><li><a href="http://signxin.com/docs/#">LoadingManager</a></li><li><a href="http://signxin.com/docs/#">MaterialLoader</a></li><li><a href="http://signxin.com/docs/#">MTLLoader</a></li><li><a href="http://signxin.com/docs/#">OBJLoader</a></li><li><a href="http://signxin.com/docs/#">OBJMTLLoader</a></li><li><a href="http://signxin.com/docs/#">ObjectLoader</a></li><li><a href="http://signxin.com/docs/#">PDBLoader</a></li><li><a href="http://signxin.com/docs/#">SVGLoader</a></li><li><a href="http://signxin.com/docs/#">TextureLoader</a></li><li><a href="http://signxin.com/docs/#">TGALoader</a></li><li><a href="http://signxin.com/docs/#">XHRLoader</a></li></ul></div><div><h3>材质</h3><ul><li><a href="http://signxin.com/docs/#">LineBasicMaterial</a></li><li><a href="http://signxin.com/docs/#">LineDashedMaterial</a></li><li><a href="http://signxin.com/docs/#">Material</a></li><li><a href="http://signxin.com/docs/#">MeshBasicMaterial</a></li><li><a href="http://signxin.com/docs/#">MeshDepthMaterial</a></li><li><a href="http://signxin.com/docs/#">MeshFaceMaterial</a></li><li><a href="http://signxin.com/docs/#">MeshLambertMaterial</a></li><li><a href="http://signxin.com/docs/#">MeshNormalMaterial</a></li><li><a href="http://signxin.com/docs/#">MeshPhongMaterial</a></li><li><a href="http://signxin.com/docs/#">PointsMaterial</a></li><li><a href="http://signxin.com/docs/#">RawShaderMaterial</a></li><li><a href="http://signxin.com/docs/#">ShaderMaterial</a></li><li><a href="http://signxin.com/docs/#">SpriteCanvasMaterial</a></li><li><a href="http://signxin.com/docs/#">SpriteMaterial</a></li></ul></div><div><h3>运算</h3><ul><li><a href="http://signxin.com/docs/#">Box2</a></li><li><a href="http://signxin.com/docs/#">Box3</a></li><li><a href="http://signxin.com/docs/#">Color</a></li><li><a href="http://signxin.com/docs/#">Euler</a></li><li><a href="http://signxin.com/docs/#">Frustum</a></li><li><a href="http://signxin.com/docs/#">Line3</a></li><li><a href="http://signxin.com/docs/#">Math</a></li><li><a href="http://signxin.com/docs/#">Matrix3</a></li><li><a href="http://signxin.com/docs/#">Matrix4</a></li><li><a href="http://signxin.com/docs/#">Plane</a></li><li><a href="http://signxin.com/docs/#">Quaternion</a></li><li><a href="http://signxin.com/docs/#">Ray</a></li><li><a href="http://signxin.com/docs/#">Sphere</a></li><li><a href="http://signxin.com/docs/#">Spline</a></li><li><a href="http://signxin.com/docs/#">Triangle</a></li><li><a href="http://signxin.com/docs/#">Vector2</a></li><li><a href="http://signxin.com/docs/#">Vector3</a></li><li><a href="http://signxin.com/docs/#">Vector4</a></li></ul></div><div><h3>对象</h3><ul><li><a href="http://signxin.com/docs/#">Bone</a></li><li><a href="http://signxin.com/docs/#">LensFlare</a></li><li><a href="http://signxin.com/docs/#">Line</a></li><li><a href="http://signxin.com/docs/#">LineSegments</a></li><li><a href="http://signxin.com/docs/#">LOD</a></li><li><a href="http://signxin.com/docs/#">Mesh</a></li><li><a href="http://signxin.com/docs/#">MorphAnimMesh</a></li><li><a href="http://signxin.com/docs/#">Points</a></li><li><a href="http://signxin.com/docs/#">SkinnedMesh</a></li><li><a href="http://signxin.com/docs/#">Skeleton</a></li><li><a href="http://signxin.com/docs/#">Sprite</a></li></ul></div><div><h3>渲染器</h3><ul><li><a href="http://signxin.com/docs/#">CanvasRenderer</a></li><li><a href="http://signxin.com/docs/#">WebGLRenderer</a></li><li><a href="http://signxin.com/docs/#">WebGLRenderTarget</a></li><li><a href="http://signxin.com/docs/#">WebGLRenderTargetCube</a></li></ul></div><div><h3>渲染器 / 着色器</h3><ul><li><a href="http://signxin.com/docs/#">ShaderChunk</a></li><li><a href="http://signxin.com/docs/#">ShaderLib</a></li><li><a href="http://signxin.com/docs/#">UniformsLib</a></li><li><a href="http://signxin.com/docs/#">UniformsUtils</a></li></ul></div><div><h3>渲染器 / WebGL</h3><ul><li><a href="http://signxin.com/docs/#">WebGLProgram</a></li><li><a href="http://signxin.com/docs/#">WebGLShader</a></li><li><a href="http://signxin.com/docs/#">WebGLState</a></li></ul></div><div><h3>渲染器 / WebGL / 插件</h3><ul><li><a href="http://signxin.com/docs/#">LensFlarePlugin</a></li><li><a href="http://signxin.com/docs/#">ShadowMapPlugin</a></li><li><a href="http://signxin.com/docs/#">SpritePlugin</a></li></ul></div><div><h3>场景</h3><ul><li><a href="http://signxin.com/docs/#">Fog</a></li><li><a href="http://signxin.com/docs/#">FogExp2</a></li><li><a href="http://signxin.com/docs/#">Scene</a></li></ul></div><div><h3>纹理</h3><ul><li><a href="http://signxin.com/docs/#">CubeTexture</a></li><li><a href="http://signxin.com/docs/#">CompressedTexture</a></li><li><a href="http://signxin.com/docs/#">DataTexture</a></li><li><a href="http://signxin.com/docs/#">Texture</a></li></ul></div><div><h3>其他</h3><ul><li><a href="http://signxin.com/docs/#">FontUtils</a></li><li><a href="http://signxin.com/docs/#">GeometryUtils</a></li><li><a href="http://signxin.com/docs/#">ImageUtils</a></li><li><a href="http://signxin.com/docs/#">SceneUtils</a></li></ul></div><div><h3>其他 / 动画</h3><ul><li><a href="http://signxin.com/docs/#">Animation</a></li><li><a href="http://signxin.com/docs/#">AnimationHandler</a></li><li><a href="http://signxin.com/docs/#">KeyFrameAnimation</a></li></ul></div><div><h3>其他 / 核心</h3><ul><li><a href="http://signxin.com/docs/#">Curve</a></li><li><a href="http://signxin.com/docs/#">CurvePath</a></li><li><a href="http://signxin.com/docs/#">Gyroscope</a></li><li><a href="http://signxin.com/docs/#">Path</a></li><li><a href="http://signxin.com/docs/#">Shape</a></li></ul></div><div><h3>其他 / 曲线</h3><ul><li><a href="http://signxin.com/docs/#">ArcCurve</a></li><li><a href="http://signxin.com/docs/#">ClosedSplineCurve3</a></li><li><a href="http://signxin.com/docs/#">CubicBezierCurve</a></li><li><a href="http://signxin.com/docs/#">CubicBezierCurve3</a></li><li><a href="http://signxin.com/docs/#">EllipseCurve</a></li><li><a href="http://signxin.com/docs/#">LineCurve</a></li><li><a href="http://signxin.com/docs/#">LineCurve3</a></li><li><a href="http://signxin.com/docs/#">QuadraticBezierCurve</a></li><li><a href="http://signxin.com/docs/#">QuadraticBezierCurve3</a></li><li><a href="http://signxin.com/docs/#">SplineCurve</a></li><li><a href="http://signxin.com/docs/#">SplineCurve3</a></li></ul></div><div><h3>其他 / 形状</h3><ul><li><a href="http://signxin.com/docs/#">BoxGeometry</a></li><li><a href="http://signxin.com/docs/#">CircleGeometry</a></li><li><a href="http://signxin.com/docs/#">CubeGeometry</a></li><li><a href="http://signxin.com/docs/#">CylinderGeometry</a></li><li><a href="http://signxin.com/docs/#">DodecahedronGeometry</a></li><li><a href="http://signxin.com/docs/#">ExtrudeGeometry</a></li><li><a href="http://signxin.com/docs/#">IcosahedronGeometry</a></li><li><a href="http://signxin.com/docs/#">LatheGeometry</a></li><li><a href="http://signxin.com/docs/#">OctahedronGeometry</a></li><li><a href="http://signxin.com/docs/#">ParametricGeometry</a></li><li><a href="http://signxin.com/docs/#">PlaneGeometry</a></li><li><a href="http://signxin.com/docs/#">PolyhedronGeometry</a></li><li><a href="http://signxin.com/docs/#">RingGeometry</a></li><li><a href="http://signxin.com/docs/#">ShapeGeometry</a></li><li><a href="http://signxin.com/docs/#">SphereGeometry</a></li><li><a href="http://signxin.com/docs/#">TetrahedronGeometry</a></li><li><a href="http://signxin.com/docs/#">TextGeometry</a></li><li><a href="http://signxin.com/docs/#">TorusGeometry</a></li><li><a href="http://signxin.com/docs/#">TorusKnotGeometry</a></li><li><a href="http://signxin.com/docs/#">TubeGeometry</a></li></ul></div><div><h3>其他 / 辅助物</h3><ul><li><a href="http://signxin.com/docs/#">ArrowHelper</a></li><li><a href="http://signxin.com/docs/#">AxisHelper</a></li><li><a href="http://signxin.com/docs/#">BoundingBoxHelper</a></li><li><a href="http://signxin.com/docs/#">BoxHelper</a></li><li><a href="http://signxin.com/docs/#">CameraHelper</a></li><li><a href="http://signxin.com/docs/#">DirectionalLightHelper</a></li><li><a href="http://signxin.com/docs/#">EdgesHelper</a></li><li><a href="http://signxin.com/docs/#">FaceNormalsHelper</a></li><li><a href="http://signxin.com/docs/#">GridHelper</a></li><li><a href="http://signxin.com/docs/#">HemisphereLightHelper</a></li><li><a href="http://signxin.com/docs/#">PointLightHelper</a></li><li><a href="http://signxin.com/docs/#">SpotLightHelper</a></li><li><a href="http://signxin.com/docs/#">VertexNormalsHelper</a></li><li><a href="http://signxin.com/docs/#">WireframeHelper</a></li></ul></div><div><h3>其他 / 对象</h3><ul><li><a href="http://signxin.com/docs/#">ImmediateRenderObject</a></li><li><a href="http://signxin.com/docs/#">MorphBlendMesh</a></li></ul></div><div><h3>示例</h3><ul><li><a href="http://signxin.com/docs/#">CombinedCamera</a></li><li><a href="http://signxin.com/docs/#">LookupTable</a></li></ul></div></div></div>
+		<iframe id="viewer" src="./three.js _ 文档_files/Creating-a-scene.html"></iframe>
+
+		<script async="" src="./three.js _ 文档_files/analytics.js"></script><script src="./three.js _ 文档_files/hm.js"></script><script src="./three.js _ 文档_files/list.js"></script>
+		<script>
+			var panel = document.getElementById( 'panel' );
+			var viewer = document.getElementById( 'viewer' );
+
+			var expandButton = document.getElementById( 'expandButton' );
+			expandButton.addEventListener( 'click', function ( event ) {
+				panel.classList.toggle( 'collapsed' );
+				event.preventDefault();
+			} );
+
+			var filterInput = document.getElementById( 'filterInput' );
+			var clearFilterButton = document.getElementById( 'clearFilterButton' );
+
+			var DELIMITER = '/';
+			var MEMBER_DELIMITER = '.';
+			var nameCategoryMap = {};
+			var sections = [];
+
+			var content = document.getElementById( 'content' );
+
+			for ( var section in list ) {
+
+				var h2 = document.createElement( 'h2' );
+				h2.textContent = section;
+
+				content.appendChild( h2 );
+
+				for ( var category in list[ section ] ) {
+
+					var div = document.createElement( 'div' );
+
+					var h3 = document.createElement( 'h3' );
+					h3.textContent = category;
+
+					div.appendChild( h3 );
+
+					var ul = document.createElement( 'ul' );
+					div.appendChild( ul );
+
+					for ( var i = 0; i < list[ section ][ category ].length; i ++ ) {
+
+						var page = list[ section ][ category ][ i ];
+
+						var li = document.createElement( 'li' );
+						var a = document.createElement( 'a' );
+						a.setAttribute( 'href', '#' );
+						( function( s, c, p ) {
+							a.addEventListener( 'click', function( e ) {
+								goTo( s, c, p );
+								e.preventDefault();
+							} )
+						} )( section, category, page[ 0 ] )
+						a.textContent = page[ 0 ];
+						li.appendChild( a );
+						ul.appendChild( li );
+
+						nameCategoryMap[page[0]] = {
+							section: section,
+							category: category,
+							name: page[0],
+							element: a
+						};
+
+					}
+
+					content.appendChild( div );
+					sections.push( ul );
+
+				}
+
+
+			}
+
+			panel.appendChild( content )
+
+			function layoutList() {
+
+				sections.forEach( function( el ) {
+					var collapsed = true;
+					Array.prototype.slice.apply( el.children ).forEach( function( item ) {
+						if( !item.classList.contains( 'filtered' ) ) {
+							collapsed = false;
+							return;
+						}
+					} );
+					if( collapsed ) {
+						el.parentElement.classList.add( 'filtered' );
+					} else {
+						el.parentElement.classList.remove( 'filtered' );
+					}
+				} );
+			}
+
+			filterInput.addEventListener( 'input', function( e ) {
+				updateFilter();
+			} );
+
+			clearFilterButton.addEventListener( 'click', function( e ) {
+				filterInput.value = '';
+				updateFilter();
+				e.preventDefault();
+			} );
+
+			function updateFilter() {
+
+				var exp = new RegExp( filterInput.value, 'gi' );
+				for( var j in nameCategoryMap ) {
+					var res = nameCategoryMap[ j ].name.match( exp );
+					if( res && res.length > 0 ) {
+						nameCategoryMap[ j ].element.parentElement.classList.remove( 'filtered' );
+						var str = nameCategoryMap[ j ].name;
+						for( var i = 0; i < res.length; i++ ) {
+							str = str.replace( res[ i ], '<b>' + res[ i ] + '</b>' );
+						}
+						nameCategoryMap[ j ].element.innerHTML = str;
+					} else {
+						nameCategoryMap[ j ].element.parentElement.classList.add( 'filtered' );
+						nameCategoryMap[ j ].element.textContent = nameCategoryMap[ j ].name;
+					}
+				}
+				layoutList();
+
+			}
+
+			function encodeUrl( path ) {
+
+				return path.replace(/\ \/\ /g, '.').replace(/\ /g, '_');
+
+			}
+
+			function decodeUrl( path ) {
+
+				return path.replace(/_/g, ' ').replace(/\./g, ' / ');
+
+			}
+
+			// Page loading
+
+			function goTo( section, category, name, member ) {
+				var parts, location;
+
+				// Fully resolve links that only provide a name
+				if(arguments.length == 1) {
+
+					// Resolve links of the form 'Class.member'
+					if(section.indexOf(MEMBER_DELIMITER) !== -1) {
+						parts = section.split(MEMBER_DELIMITER)
+						section = parts[0];
+						member = parts[1];
+					}
+
+					location = nameCategoryMap[section];
+					if (!location) return;
+					section = location.section;
+					category = location.category;
+					name = location.name;
+				}
+
+				var title = 'three.js - documentation - ' + section + ' - ' + name;
+				var url = encodeUrl(section) + DELIMITER + encodeUrl( category ) + DELIMITER + encodeUrl(name) + (!!member ? MEMBER_DELIMITER + encodeUrl(member) : '');
+
+				window.location.hash = url;
+				window.document.title = title;
+
+				viewer.src = pages[ section ][ category ][ name ] + '.html' + (!!member ? '#'+member : '');
+
+				panel.classList.add( 'collapsed' );
+
+			}
+
+			function goToHash() {
+
+				var hash = window.location.hash.substring( 1 ).split(DELIMITER);
+				var member = hash[2].split(MEMBER_DELIMITER)
+				goTo( decodeUrl(hash[0]), decodeUrl(hash[1]), decodeUrl(member[0]), decodeUrl(member.length > 1 ? member[1] : '') );
+
+			}
+
+			window.addEventListener( 'hashchange', goToHash, false );
+
+			if ( window.location.hash.length > 0 ) goToHash();
+
+			console.log([
+				'    __     __',
+				' __/ __\\  / __\\__   ____   _____   _____',
+				'/ __/  /\\/ /  /___\\/ ____\\/ _____\\/ _____\\',
+				'\\/_   __/ /   _   / /  __/ / __  / / __  /_   __   _____',
+				'/ /  / / /  / /  / /  / / /  ___/ /  ___/\\ _\\/ __\\/ _____\\',
+				'\\/__/  \\/__/\\/__/\\/__/  \\/_____/\\/_____/\\/__/ /  / /  ___/',
+				'                                         / __/  /  \\__  \\',
+				'                                         \\/____/\\/_____/'
+			].join('\n'));
+			console.log("translated by Sign");
+
+		</script>
+		<script src="./three.js _ 文档_files/three.min.js"></script>
+		<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?c733f37c8529d1373d90a23e09e724b4";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+		</script>
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-74514423-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+	
+
+</body></html>

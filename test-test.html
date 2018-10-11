@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="canvas"  style="background:#000">浏览器不支持canvas</canvas>
+
+<script>
+    var canvas = document.getElementById("canvas");
+    canvas.width = document.documentElement.clientWidth;
+    canvas.height = document.documentElement.clientHeight;
+    var context = canvas.getContext('2d');
+    var imgObj = new Image();
+    imgObj.src = "./partical/image/2/logo.png";
+
+    // var dots = getimgData(imgObj);
+
+
+    imgObj.onload = function(){
+        context.drawImage(this, 0, 0, canvas.width / 2, canvas.height / 2);
+    }
+    var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+    // context.clearRect(0, 0, canvas.width, canvas.height);
+    var dots = [];
+    for (var x = 0; x < imgData.width; x += 6) {
+        for (var y = 0; y < imgData.height; y += 6) {
+            var i = (y * imgData.width + x) * 4;
+            if (imgData.data[i] >= 128) {
+                console.log(imgData.data, 'imgData');
+                var dot = new Dot(x - 3, y - 3, 0, 3);
+                dots.push(dot);
+            }
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/jquery.fullPage.css">
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div id="fullpage">
+	<div class="section" id="page1">
+		<header>
+			<img class="logo" src="./image/1/logo.png" alt="中化信息|科学至上">
+			<div class="nav">
+				<a href="#">关于我们</a>
+				<a href="#">新闻中心</a>
+				<a href="#">业务纵览</a>
+				<a href="#">企业文化</a>
+				<a href="#">加入我们</a>
+				<img class="close" src="./image/close.png" alt="关闭">
+			</div>
+		</header>
+		<div>
+			<img class="description" src="./image/1/text.png" alt="知行合一、科技驱动">
+		</div>
+	</div>
+	<div class="section" id="page2">
+		<header>
+			<img class="logo" src="./image/2/logo.png" alt="中化信息">
+			<div class="nav">
+				<a href="#">关于我们</a>
+				<a href="#">新闻中心</a>
+				<a href="#">业务纵览</a>
+				<a href="#">企业文化</a>
+				<a href="#">加入我们</a>
+				<img class="close" src="./image/close.png" alt="关闭">
+			</div>
+		</header>
+		<div >
+			<div class="newsarea">
+				<img src="./image/2/news.png" alt="">
+				<p>
+					<span>2018/07/10</span>
+					<span>新闻新闻新闻新闻新闻新闻新闻新闻新闻</span>
+				</p>
+				<a href=""></a>
+			</div>
+			<img class="description" src="./image/2/text.png" alt="合作共赢、开放共享">
+		</div>
+	</div>
+	<div class="section" id="page3">
+		<header>
+			<img class="logo" src="./image/2/logo.png" alt="中化信息|科学至上">
+			<div class="nav">
+				<a href="#">关于我们</a>
+				<a href="#">新闻中心</a>
+				<a href="#">业务纵览</a>
+				<a href="#">企业文化</a>
+				<a href="#">加入我们</a>
+				<img class="close" src="./image/close.png" alt="关闭">
+			</div>
+		</header>
+		<div>
+			<img class="description" src="./image/3/text.png" alt="自主研发">
+		</div>
+	</div>
+</div>
+<canvas id="canvas" >浏览器不支持canvas</canvas>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#fullpage').fullpage({
+//			sectionsColor: ['#0b0d1d', '#0b0d1d', '#0b0d1d'],
+			anchors: ['page_1', 'page_2', 'page_3'],
+			autoScrolling:true,
+			scrollHorizontally: true,
+		});
+	});
+</script>
+<script src="js/canvas.js"></script>
+</body>
+</html>
