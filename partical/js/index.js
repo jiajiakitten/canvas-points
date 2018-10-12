@@ -47,7 +47,7 @@ function drawImg(imgObj, index) {
     imgObj.onload = function(){
         switch (index) {
             case 1:
-                context.drawImage(imgObj, 0, 0, imgObj.width, imgObj.height, 0, canvas.height / 2.4, imgObj.width / 2, imgObj.height / 2);
+                context.drawImage(imgObj, 0, canvas.height - imgObj.height / 2, imgObj.width / 2, imgObj.height / 2);
                 break;
             case 2:
                 distance = 4;
@@ -59,8 +59,9 @@ function drawImg(imgObj, index) {
             case 3:
                 distance = 1;
                 context.drawImage(imgObj, canvas.width - imgObj.width / 1.3, canvas.height - imgObj.height / 1.3, imgObj.width / 1.3, imgObj.height / 1.3);
+                // building dots
                 dots3 = getimgData(imgObj, distance);
-                console.log('+++++1');
+                console.log(dots3, '+++++1');
                 changePics(dots3, 3);
                 break;
             default:
@@ -119,17 +120,17 @@ function changePics(dots, index) {
             break;
         case 3:
             // 图三的dots
-            console.log('+++++2');
+            console.log(dots, dots2, '+++++2');
             dots.forEach(function(i) {
-                this.x = dots2[i + 9].dx;
-                this.y = dots2[i + 9].dy;
-                this.z = dots2[i + 9].dz;
+                this.x = dots2[i * 15].dx;
+                this.y = dots2[i * 15].dy;
+                this.z = dots2[i * 15].dz;
                 this.tx = this.dx;
                 this.ty = this.dy;
                 this.tz = this.dz;
                 this.paint();
             });
-            console.log('+++++3');
+            console.log(dots, '+++++33');
             animateToImg(dots);
             break;
     }
