@@ -68,7 +68,7 @@
 <canvas id="canvas" >浏览器不支持canvas</canvas>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
-<script src="js/canvas.js"></script>
+<script src="js/index.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#fullpage').fullpage({
@@ -78,15 +78,26 @@
 			scrollHorizontally: true,
             navigation: true,
             navigationColor: '#fff',
-            navigationPosition: 'left'
-
+            navigationPosition: 'left',
+			afterLoad: Loaded
 		});
-        var imgObj2 = new Image();
-        imgObj2.src = "./image/2/building.png";
-
-        var imgObj3 = new Image();
-        imgObj3.src = "./image/3/bottle.png";
-        drawPics(imgObj3, 3);
+		function Loaded(e) {
+			switch (e) {
+				case 'page_1':
+					break;
+				case 'page_2':
+					var imgObj2 = new Image();
+					imgObj2.src = "./image/2/building.png";
+					drawPics(imgObj2, 2);
+					break;
+				case 'page_3':
+					var imgObj3 = new Image();
+					imgObj3.src = "./image/3/bottle.png";
+					changePictures(imgObj3, 3);
+					break;
+				default: break
+			}
+		}
 	});
 </script>
 </body>
