@@ -70,7 +70,9 @@
 <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
 <script src="js/index.js"></script>
 <script type="text/javascript">
+
 	$(document).ready(function() {
+        Loaded('page_1');
 		$('#fullpage').fullpage({
 //			sectionsColor: ['#0b0d1d', '#0b0d1d', '#0b0d1d'],
 			anchors: ['page_1', 'page_2', 'page_3'],
@@ -81,19 +83,28 @@
             navigationPosition: 'left',
 			afterLoad: Loaded
 		});
+
 		function Loaded(e) {
 			switch (e) {
 				case 'page_1':
+                    var imgObj11 = new Image();
+                    imgObj11.src = "./image/1/r1.png";
+                    var imgObj12 = new Image();
+                    imgObj12.src = "./image/1/r2.png";
+                    var imgObj13 = new Image();
+                    imgObj13.src = "./image/1/r3.png";
+                    drawPics([imgObj11, imgObj12, imgObj13], 1);
 					break;
 				case 'page_2':
-					var imgObj2 = new Image();
-					imgObj2.src = "./image/2/building.png";
-					drawPics(imgObj2, 2);
+                    var imgObj2 = new Image();
+                    imgObj2.src = "./image/2/building.png";
+                    drawPics([imgObj2], 2);
 					break;
 				case 'page_3':
-					var imgObj3 = new Image();
-					imgObj3.src = "./image/3/bottle.png";
-					changePictures(imgObj3, 3);
+
+                    var imgObj3 = new Image();
+                    imgObj3.src = "./image/3/bottle.png";
+					changePictures([imgObj3], 3);
 					break;
 				default: break
 			}

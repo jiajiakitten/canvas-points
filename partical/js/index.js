@@ -6,7 +6,7 @@ var derection = true;
 var dots1 = [];
 var dots2 = [];
 var dots3 = [];
-focallength = 350;
+focallength = 100;
 
 var Dot = function (centerX, centerY, centerZ, radius) {
     this.dx = centerX;
@@ -18,9 +18,9 @@ var Dot = function (centerX, centerY, centerZ, radius) {
     this.z = centerZ;
     this.x = centerX;
     this.y = centerY;
-    this.r = 100;
-    this.g = 155;
-    this.b = 55;
+    this.r = 255;
+    this.g = 255;
+    this.b = 255;
     this.radius = radius;
 }
 Dot.prototype = {
@@ -31,7 +31,7 @@ Dot.prototype = {
         context.arc(canvas.width / 2 + (this.x - canvas.width / 2) * scale, canvas.height / 2 + (this.y - canvas.height / 2) * scale, this.radius * scale, 0, 2 * Math.PI);
         // context.fillStyle = "rgba(250,250,250," + scale + ")";
         // console.log(`rgba(${this.r * scale},${this.r * scale},${this.r * scale},${scale})`);
-        context.fillStyle = `rgba(${Math.random() * 10 + 100},${Math.random() * 10  + 200},${Math.random() * 10 + 100},${scale})`;
+        context.fillStyle = `rgba(${Math.random() * 10 + this.r},${Math.random() * 10  + this.r},${Math.random() * 10 + this.r},${Math.random() + 0.5})`;
         context.fill();
         context.restore();
     }
@@ -41,27 +41,49 @@ Array.prototype.forEach = function(callback) {
         callback.call(this[i], i);
     }
 }
-function drawImg(imgObj, index) {
+function drawImg(imgObjList, index) {
     context.save();
     var distance = 1;
-    imgObj.onload = function(){
+    imgObjList[0].onload = function(){
         switch (index) {
             case 1:
-                context.drawImage(imgObj, 0, canvas.height - imgObj.height / 2, imgObj.width / 2, imgObj.height / 2);
+                imgObjList[1].onload = function(){
+                    console.log(imgObjList,index,  'imgObjList');
+                    imgObjList[2].onload = function(){
+                        var imgObj11 = imgObjList[0];
+                        console.log(imgObj11, 'imgObj11');
+                        var imgObj12 = imgObjList[1];
+                        var imgObj13 = imgObjList[2];
+                        context.drawImage(imgObj11, 0, canvas.height - imgObj11.height / 2, imgObj11.width / 2, imgObj11.height / 2);
+                        // dots11 = getimgData(imgObj, distance);
+                        // initAnimate(dots11);
+                        // context.drawImage(imgObj, 0, canvas.height - imgObj.height / 2, imgObj.width / 2, imgObj.height / 2);
+                        // dots12 = getimgData(imgObj, distance);
+                        // initAnimate(dots12);
+                        // context.drawImage(imgObj, 0, canvas.height - imgObj.height / 2, imgObj.width / 2, imgObj.height / 2);
+                        // dots13 = getimgData(imgObj, distance);
+                        // initAnimate(dots13);
+                    }
+                };
+
                 break;
             case 2:
-                distance = 4;
+                var imgObj = imgObjList[0];
+                distance = 4;    console.log(imgObj, '12');
                 context.drawImage(imgObj, 0, canvas.height - imgObj.height / 2, imgObj.width / 2, imgObj.height / 2);
                 dots2 = getimgData(imgObj, distance);
                 initAnimate(dots2);
                 console.log(dots2, 'in2');
                 break;
             case 3:
-                distance = 1;
+                var imgObj = imgObjList[0];
+                distance = 4;
+                console.log(imgObj, '+++++1');
+                context.clearRect(0, 0, canvas.width, canvas.height);
                 context.drawImage(imgObj, canvas.width - imgObj.width / 1.3, canvas.height - imgObj.height / 1.3, imgObj.width / 1.3, imgObj.height / 1.3);
                 // building dots
                 dots3 = getimgData(imgObj, distance);
-                console.log(dots3, '+++++1');
+                // console.log(dots3, '+++++1');
                 changePics(dots3, 3);
                 break;
             default:
@@ -78,7 +100,7 @@ function getimgData(imgObj, distance) {
     for (var x = 0; x < imgData.width; x += distance) {
         for (var y = 0; y < imgData.height; y += distance) {
             var i = (y * imgData.width + x) * 4;
-            if (imgData.data[i] >= 128) {
+            if (imgData.data[i] >= 10) {
                 var dot = new Dot(x - 3, y - 3, 0, 1);
                 dots.push(dot);
             }
@@ -120,18 +142,29 @@ function changePics(dots, index) {
             break;
         case 3:
             // 图三的dots
-            console.log(dots, dots2, '+++++2');
-            dots.forEach(function(i) {
-                this.x = dots2[i * 15].dx;
-                this.y = dots2[i * 15].dy;
-                this.z = dots2[i * 15].dz;
-                this.tx = this.dx;
-                this.ty = this.dy;
-                this.tz = this.dz;
+            console.log(dots, dots2, '+++++22');
+            var a = 0;
+            dots2.forEach(function(i) {
+                // if (a >= dots.length) a = i % dots.length;
+                var dots2L = dots2.length;
+                var dots3L = dots.length;
+                let b = parseInt(dots2L / dots3L);
+                // this.dx = dots[a].dx;
+                // this.dy = dots[a].dy;
+                // this.dz = dots[a].dz;
+                if (i % b === 1 && dots[a]) {
+                    this.dx = dots[a].dx;
+                    this.dy = dots[a].dy;
+                    this.dz = dots[a].dz;
+                    a++;
+                } else {
+                    this.radius = 0;
+                }
                 this.paint();
             });
             console.log(dots, '+++++33');
-            animateToImg(dots);
+
+            animateToImg(dots2);
             break;
     }
 
@@ -158,7 +191,7 @@ function animateToImg(dots) {
         dot.paint();
     });
     // 超过300ms变成图片, 变成false
-    if (thisTime - lastTime <= 300) {
+    // if (thisTime - lastTime <= 300) {
         if ("requestAnimationFrame" in window) {
             requestAnimationFrame(function(){
                 animateToImg(dots)
@@ -179,12 +212,12 @@ function animateToImg(dots) {
                 animateToImg(dots)
             });
         }
-    }
+    // }
 }
 
 
-function drawPics(imgObj, index) {
-    drawImg(imgObj, index);
+function drawPics(imgObjList, index) {
+    drawImg(imgObjList, index);
 
 }
 
