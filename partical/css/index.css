@@ -105,8 +105,311 @@ html,body,p
     left: 0;
     top: 0;
     background: #0b0d1d;
+    /*background: #666;*/
 }
 #fullpage {
     position: relative;
     z-index: 10;
+}
+.dots{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 0.8;
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+}
+.dots  i{
+    -webkit-animation: dotanm 8s infinite;
+    animation: dotanm 8s infinite;
+    background: #fff;
+    background: -webkit-radial-gradient(circle closest-side,#fff 10%,rgba(255,255,255,0) 50%,rgba(255,255,255,0));
+    background: radial-gradient(circle closest-side,#fff 10%,rgba(255,255,255,0) 50%,rgba(255,255,255,0));
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    -webkit-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+@-webkit-keyframes dotanm {
+    0% {
+        -webkit-transform: scale(1) translateX(5px) translateY(5px);
+        transform: scale(1) translateX(5px) translateY(5px);
+        opacity: .9
+    }
+
+    50% {
+        -webkit-transform: scale(1.5) translateX(-5px) translateY(-5px);
+        transform: scale(1.5) translateX(-5px) translateY(-5px);
+        opacity: 1
+    }
+
+    100% {
+        -webkit-transform: scale(1) translateX(5px) translateY(5px);
+        transform: scale(1) translateX(5px) translateY(5px);
+        opacity: .9
+    }
+}
+
+@keyframes dotanm {
+    0% {
+        -webkit-transform: scale(1) translateX(5px) translateY(5px);
+        transform: scale(1) translateX(5px) translateY(5px);
+        opacity: .9
+    }
+
+    50% {
+        -webkit-transform: scale(1.5) translateX(-5px) translateY(-5px);
+        transform: scale(1.5) translateX(-5px) translateY(-5px);
+        opacity: 1
+    }
+
+    100% {
+        -webkit-transform: scale(1) translateX(5px) translateY(5px);
+        transform: scale(1) translateX(5px) translateY(5px);
+        opacity: .9
+    }
+}
+
+.dots i:nth-of-type(1) {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s
+}
+
+.dots i:nth-of-type(2) {
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s
+}
+
+.dots i:nth-of-type(3) {
+    -webkit-animation-delay: 4s;
+    animation-delay: 4s
+}
+
+.dots i:nth-of-type(4) {
+    -webkit-animation-delay: 6s;
+    animation-delay: 6s
+}
+
+.dots i:nth-of-type(5) {
+    -webkit-animation: none;
+    animation: none
+}
+.dots .dot-1{
+    -webkit-animation-delay: .3s;
+    animation-delay: .3s;
+    -webkit-animation-duration: 9s;
+    animation-duration: 9s
+}
+
+.dots .dot-2{
+    -webkit-animation-delay: .3s;
+    animation-delay: .3s;
+    -webkit-animation-duration: 9s;
+    animation-duration: 9s
+}
+
+.dots .dot-3{
+    -webkit-animation-delay: .2s;
+    animation-delay: .2s;
+    -webkit-animation-duration: 6s;
+    animation-duration: 6s
+}
+
+.dots .dot-4{
+    -webkit-animation-delay: .1s;
+    animation-delay: .1s;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s
+}
+
+.dots .dot-5{
+    -webkit-animation-delay: .3s;
+    animation-delay: .3s;
+    -webkit-animation-duration: 10s;
+    animation-duration: 10s
+}
+
+.dots .dot-6{
+    -webkit-animation-delay: .2s;
+    animation-delay: .2s;
+    -webkit-animation-duration: 8s;
+    animation-duration: 8s
+}
+
+.dots .dot-7{
+    -webkit-animation-delay: .1s;
+    animation-delay: .1s;
+    -webkit-animation-duration: 7s;
+    animation-duration: 7s
+}
+
+.dots .dot-8{
+    -webkit-animation-delay: .3s;
+    animation-delay: .3s;
+    -webkit-animation-duration: 5s;
+    animation-duration: 5s
+}
+
+.dots .dot-9 {
+    -webkit-animation-delay: .2s;
+    animation-delay: .2s;
+    -webkit-animation-duration: 4s;
+    animation-duration: 4s
+}
+
+.dots i {
+    position: absolute;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 0.15rem;
+    height: 0.15rem;
+    left: 0.4rem;
+    top: 0.4rem;
+    background: #fff;
+     opacity: 0
+}
+
+.fp-tableCell .dots {
+    -webkit-transition-delay: 1s,1s;
+    transition-delay: 1s,1s
+}
+
+.fullpage #page1 .dots .dot-1 {
+    right: 40%;
+    margin-top: -17%
+}
+
+#page1 .dots .dot-1 {
+    left: 20%;
+    top: 13%
+}
+
+#page1 .dots .dot-2 {
+    left: 20%;
+    top: 23%
+}
+
+#page1 .dots .dot-3 {
+    left: 98%;
+     top: 13%
+}
+
+#page1 .dots .dot-4 {
+    left: 70%;
+    top: 53%
+}
+
+#page1 .dots .dot-5 {
+    left: 68%;
+    top: 13%
+}
+
+#page1 .dots .dot-6 {
+    left: 40%;
+    top: 93%
+}
+#page1 .dots .dot-7 {
+    left: 8%;
+    top: 13%
+}
+
+#page1 .dots .dot-8 {
+    left: 80%;
+    top: 45%
+}
+
+#page1 .dots .dot-8 {
+    left: 35%;
+    top: 65%
+}
+#page2 .dots .dot-1 {
+    left: 90%;
+    top: 73%
+}
+
+#page2 .dots .dot-2 {
+    left: 80%;
+    top: 53%
+}
+
+#page2 .dots .dot-3 {
+    left: 8%;
+    top: 3%
+}
+
+#page2 .dots .dot-4 {
+    left: 90%;
+    top: 73%
+}
+
+#page2 .dots .dot-5 {
+    left: 8%;
+    top: 13%
+}
+
+#page2 .dots .dot-6 {
+    left: 80%;
+    top: 93%
+}
+#page2 .dots .dot-7 {
+    left: 8%;
+    top: 13%
+}
+
+#page2 .dots .dot-8 {
+    left: 30%;
+    top: 45%
+}
+
+#page2 .dots .dot-8 {
+    left: 29%;
+    top: 65%
+}
+#page3 .dots .dot-1 {
+    left: 20%;
+    top: 73%
+}
+
+#page3 .dots .dot-2 {
+    left: 60%;
+    top: 53%
+}
+
+#page3 .dots .dot-3 {
+    left: 8%;
+    top: 53%
+}
+
+#page3 .dots .dot-4 {
+    left: 20%;
+    top: 73%
+}
+
+#page3 .dots .dot-5 {
+    left: 8%;
+    top: 13%
+}
+
+#page3 .dots .dot-6 {
+    left: 80%;
+    top: 93%
+}
+#page3 .dots .dot-7 {
+    left: 8%;
+    top: 13%
+}
+
+#page3 .dots .dot-8 {
+    left: 30%;
+    top: 45%
+}
+
+#page3 .dots .dot-8 {
+    left: 89%;
+    top: 65%
 }

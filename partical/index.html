@@ -23,6 +23,18 @@
 		<div>
 			<img class="description" src="./image/1/text.png" alt="知行合一、科技驱动">
 		</div>
+		<div class="dots">
+			<i class="dot dot-1"></i>
+			<i class="dot dot-2"></i>
+			<i class="dot dot-3"></i>
+			<i class="dot dot-4"></i>
+			<i class="dot dot-5"></i>
+			<i class="dot dot-6"></i>
+			<i class="dot dot-7"></i>
+			<i class="dot dot-8"></i>
+			<i class="dot dot-9"></i>
+		</div>
+
 	</div>
 	<div class="section" id="page2">
 		<header>
@@ -46,6 +58,17 @@
 				<a href=""></a>
 			</div>
 			<img class="description" src="./image/2/text.png" alt="合作共赢、开放共享">
+			<div class="dots">
+				<i class="dot dot-1"></i>
+				<i class="dot dot-2"></i>
+				<i class="dot dot-3"></i>
+				<i class="dot dot-4"></i>
+				<i class="dot dot-5"></i>
+				<i class="dot dot-6"></i>
+				<i class="dot dot-7"></i>
+				<i class="dot dot-8"></i>
+				<i class="dot dot-9"></i>
+			</div>
 		</div>
 	</div>
 	<div class="section" id="page3">
@@ -63,6 +86,17 @@
 		<div>
 			<img class="description" src="./image/3/text.png" alt="自主研发">
 		</div>
+		<div class="dots">
+			<i class="dot dot-1"></i>
+			<i class="dot dot-2"></i>
+			<i class="dot dot-3"></i>
+			<i class="dot dot-4"></i>
+			<i class="dot dot-5"></i>
+			<i class="dot dot-6"></i>
+			<i class="dot dot-7"></i>
+			<i class="dot dot-8"></i>
+			<i class="dot dot-9"></i>
+		</div>
 	</div>
 </div>
 <canvas id="canvas" >浏览器不支持canvas</canvas>
@@ -72,6 +106,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
+	    location.replace(location.href.split('#')[0] + '#page_1');
         Loaded('page_1');
 		$('#fullpage').fullpage({
 //			sectionsColor: ['#0b0d1d', '#0b0d1d', '#0b0d1d'],
@@ -98,10 +133,9 @@
 				case 'page_2':
                     var imgObj2 = new Image();
                     imgObj2.src = "./image/2/building.png";
-                    drawPics([imgObj2], 2);
-					break;
+                    changePictures([imgObj2], 2);
+                    break;
 				case 'page_3':
-
                     var imgObj3 = new Image();
                     imgObj3.src = "./image/3/bottle.png";
 					changePictures([imgObj3], 3);
