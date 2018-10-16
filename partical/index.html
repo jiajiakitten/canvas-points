@@ -99,15 +99,53 @@
 		</div>
 	</div>
 </div>
+<div id="three-canvas">
+
+</div>
 <canvas id="canvas" >浏览器不支持canvas</canvas>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
-<script src="js/index.js"></script>
+<!--<script src="js/three.js"></script>-->
+<script src="js/Tween.js"></script>
+<!--<script src="js/index.js"></script>-->
 <script type="text/javascript">
 
 	$(document).ready(function() {
 	    location.replace(location.href.split('#')[0] + '#page_1');
-        Loaded('page_1');
+        var canvas = document.getElementById("canvas");
+        canvas.width = document.documentElement.clientWidth;
+        canvas.height = document.documentElement.clientHeight;
+        var context = canvas.getContext('2d');
+        var focallength = 100;
+        var Dot = function (centerX, centerY, centerZ, radius) {
+            this.dx = centerX;
+            this.dy = centerY;
+            this.dz = centerZ;
+            this.z = centerZ;
+            this.x = centerX;
+            this.y = centerY;
+            this.r = 255;
+            this.a = 1;
+            this.radius = radius;
+        };
+        Dot.prototype = {
+            paint: function () {
+                context.save();
+                context.beginPath();
+                var scale = focallength / (focallength + this.z);
+                context.arc(canvas.width / 2 + (this.x - canvas.width / 2) * scale, canvas.height / 2 + (this.y - canvas.height / 2) * scale, this.radius * scale, 0, 2 * Math.PI);
+                // context.fillStyle = "rgba(250,250,250," + scale + ")";
+                // console.log(`rgba(${this.r * scale},${this.r * scale},${this.r * scale},${scale})`);
+                context.fillStyle = `rgba(${Math.random() * 10 + this.r},${Math.random() * 10  + this.r},${Math.random() * 10 + this.r},${Math.random() + 0.5})`;
+                context.fill();
+                context.restore();
+            }
+        };
+        Array.prototype.forEach = function(callback) {
+            for (var i = 0; i < this.length; i++) {
+                callback.call(this[i]);
+            }
+        };
 		$('#fullpage').fullpage({
 //			sectionsColor: ['#0b0d1d', '#0b0d1d', '#0b0d1d'],
 			anchors: ['page_1', 'page_2', 'page_3'],
@@ -116,33 +154,188 @@
             navigation: true,
             navigationColor: '#fff',
             navigationPosition: 'left',
-			afterLoad: Loaded
+			afterLoad: changePic
 		});
+        var DotsList = [];
+        var dotsListTemp;
+		var dotsList = [];
+        LoadedImgPage1();
+        function LoadedImgPage1() {
+            var imgObj11 = new Image();
+            imgObj11.src = "./image/1/r1.png";
+            var imgObj12 = new Image();
+            imgObj12.src = "./image/1/r2.png";
+            var imgObj13 = new Image();
+            imgObj13.src = "./image/1/r3.png";
+            var imgObj2 = new Image();
+            imgObj2.src = "./image/2/building.png";
+            imgObj11.onload = function () {
+                context.drawImage(imgObj11, canvas.width * 2 / 5 + 60, canvas.height * 2 / 5 - 10, imgObj11.width / 6, imgObj11.height / 6);
+                DotsList.push(getimgData(3));
 
-		function Loaded(e) {
+                imgObj12.onload = function () {
+                    context.drawImage(imgObj12, canvas.width * 2 / 5 + 130, canvas.height * 2 / 5 + 5, imgObj12.width / 6, imgObj12.height / 6);
+                    DotsList.push(getimgData(3));
+
+                    imgObj13.onload = function () {
+                        context.drawImage(imgObj13, canvas.width * 2 / 5 + 70, canvas.height * 1 / 5 + 50, imgObj13.width / 6, imgObj13.height / 6);
+                        DotsList.push(getimgData(3));
+
+                        imgObj2.onload = function () {
+                            context.drawImage(imgObj2, 0, canvas.height - imgObj2.height / 2, imgObj2.width / 2, imgObj2.height / 2);
+                            // building 的图
+                            dotsList = getimgData(4);
+                            DotsList.push(dotsList);
+                            // 齿轮的图
+                            dotsListTemp = DotsList[0].concat(DotsList[1], DotsList[2]);
+                            var dotsListTempL = dotsListTemp.length - 1;
+                            var dotListL = dotsList.length;
+                            //dotsList的xyz成为齿轮的的 dx dy是bbuilding的
+                            for (var i = 0; i < dotListL; i++ ) {
+                                if (!dotsListTemp[i]) {
+                                    var b = i % dotsListTempL;
+                                    dotsList[i].x = dotsListTemp[b].x;
+                                    dotsList[i].y = dotsListTemp[b].y;
+                                    dotsList[i].z =dotsListTemp[b].z;
+								} else {
+                                    dotsList[i].x = dotsListTemp[i].x;
+                                    dotsList[i].y = dotsListTemp[i].y;
+                                    dotsList[i].z =dotsListTemp[i].z;
+								}
+							}
+                            initAnimate(dotsListTemp);
+                        };
+                    };
+                };
+            }
+
+        }
+        function LoadedImgPage3() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            var imgObj3 = new Image();
+            imgObj3.src = "./image/3/1.png";
+            imgObj3.onload = function () {
+                context.drawImage(imgObj3, canvas.width - imgObj3.width * 2 / 1.3, canvas.height - imgObj3.height * 2 / 1.3, imgObj3.width * 2 / 1.3, imgObj3.height * 2 / 1.3);
+                DotsList.push(getimgData(4));
+                animateToImg(dotsList);
+            };
+		}
+		function changeToImg(Dotsindex) {
+            //dotsList的xyz成为building的的 dx dy是building的
+
+            // dotsList 单独的 DotsList 全部的 dotsListTemp page1 3张图
+			// 将要变成的图
+			var dotsTmp = DotsList[Dotsindex];
+            var TempL = dotsTmp.length - 1;
+            var dotListL = dotsList.length;
+            console.log(dotsList, 'dotsList0');
+            for (var i = 0; i < dotListL; i++ ) {
+                if (!dotsTmp[i]) {
+                    var b = i % TempL;
+                    dotsList[i].dx = dotsTmp[b].x;
+                    dotsList[i].dy = dotsTmp[b].y;
+                    dotsList[i].dz =dotsTmp[b].z;
+                } else {
+                    dotsList[i].dx = dotsTmp[i].x;
+                    dotsList[i].dy = dotsTmp[i].y;
+                    dotsList[i].dz =dotsTmp[i].z;
+                }
+            }
+            //dotsList的xyz成为building的的 dx dy是瓶子的
+            console.log(dotsList);
+            animateToImg(dotsList);
+        }
+        function getimgData(distance) {
+            var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+            var dots = [];
+            for (var x = 0; x < imgData.width; x += distance) {
+                for (var y = 0; y < imgData.height; y += distance) {
+                    var i = (y * imgData.width + x) * 4;
+                    if (imgData.data[i] >= 10) {
+                        var dot = new Dot(x, y, 0, 1);
+                        dots.push(dot);
+                    }
+                }
+            }
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            return dots;
+        }
+        function changePic(e) {
 			switch (e) {
 				case 'page_1':
-                    var imgObj11 = new Image();
-                    imgObj11.src = "./image/1/r1.png";
-                    var imgObj12 = new Image();
-                    imgObj12.src = "./image/1/r2.png";
-                    var imgObj13 = new Image();
-                    imgObj13.src = "./image/1/r3.png";
-                    drawPics([imgObj11, imgObj12, imgObj13], 1);
 					break;
 				case 'page_2':
-                    var imgObj2 = new Image();
-                    imgObj2.src = "./image/2/building.png";
-                    changePictures([imgObj2], 2);
+				    if(DotsList.length < 5) LoadedImgPage3();
+				    //dotsList的xyz成为齿轮的的 dx dy是bbuilding的
+
+                    //dotsList的xyz成为building的的 dx dy是building的
                     break;
 				case 'page_3':
-                    var imgObj3 = new Image();
-                    imgObj3.src = "./image/3/bottle.png";
-					changePictures([imgObj3], 3);
+                    changeToImg(4);
 					break;
 				default: break
 			}
 		}
+		function initAnimate(dots) {
+            dots.forEach(function() {
+				 this.x = Math.random() * 3;
+				 this.y = Math.random() * canvas.height;
+				 this.z = Math.random() * focallength * 2 - focallength;
+				 this.tx = Math.random() * 3;
+				 this.ty = Math.random() * canvas.height;
+				 this.tz = Math.random() * focallength * 2 - focallength;
+				 this.paint();
+			});
+			animateToImg(dots);
+		}
+        // 定义动画
+		 function animateToImg(dots) {
+             var thisTime = +new Date();
+			 var lastTime;
+			 var flag = true;
+			 context.clearRect(0, 0, canvas.width, canvas.height);
+			 dots.forEach(function() {
+				 var dot = this;
+				 if (Math.abs(dot.dx - dot.x) < 0.1 && Math.abs(dot.dy - dot.y) < 0.1 && Math.abs(dot.dz - dot.z) < 0.1) {
+					 // 已经变成图片
+					 dot.x = dot.dx;
+					 dot.y = dot.dy;
+					 dot.z = dot.dz;
+                     flag = false;
+				 } else {
+					 // 正在变成图片
+					 dot.x = dot.x + (dot.dx - dot.x) * 0.1;
+					 dot.y = dot.y + (dot.dy - dot.y) * 0.1;
+					 dot.z = dot.z + (dot.dz - dot.z) * 0.1;
+					 lastTime = +new Date()
+				 }
+				 dot.paint();
+			 });
+
+			 // 超过300ms变成图片, 变成false
+			 if (thisTime - lastTime <= 300 && flag) {
+				 if ("requestAnimationFrame" in window) {
+					 requestAnimationFrame(function(){
+						 animateToImg(dots)
+					 });
+				 }
+				 else if ("webkitRequestAnimationFrame" in window) {
+					 webkitRequestAnimationFrame(function(){
+						 animateToImg(dots)
+					 });
+				 }
+				 else if ("msRequestAnimationFrame" in window) {
+					 msRequestAnimationFrame(function(){
+						 animateToImg(dots)
+					 });
+				 }
+				 else if ("mozRequestAnimationFrame" in window) {
+					 mozRequestAnimationFrame(function(){
+						 animateToImg(dots)
+					 });
+				 }
+			 }
+		 }
 	});
 </script>
 </body>
