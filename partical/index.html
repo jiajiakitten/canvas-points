@@ -299,7 +299,6 @@
              var thisTime = +new Date();
 			 var lastTime;
 			 var flag = true;
-             console.log(dots[1].dx - dots[1].x, dots[1].dy - dots[1].y, dots[1].dz - dots[1].z);
              context.clearRect(0, 0, canvas.width, canvas.height);
 			 dots.forEach(function() {
                  var dot = this;
@@ -318,7 +317,6 @@
 				 }
 				 dot.paint();
 			 });
-             console.log(thisTime - lastTime <= 300, flag, thisTime,lastTime );
 			 // 超过300ms变成图片, 变成false
 			 if (thisTime - lastTime <= 300 && flag) {
 				 if ("requestAnimationFrame" in window) {
