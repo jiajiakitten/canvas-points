@@ -184,8 +184,8 @@
                         imgObj2.onload = function () {
                             context.drawImage(imgObj2, 0, canvas.height - imgObj2.height / 2, imgObj2.width / 2, imgObj2.height / 2);
                             // building 的图
-                            dotsList = getimgData(4);
-                            DotsList.push(dotsList);
+                            DotsList.push(getimgData(4));
+                            dotsList = DotsList[3];
                             // 齿轮的图
                             dotsListTemp = DotsList[0].concat(DotsList[1], DotsList[2]);
                             var dotsListTempL = dotsListTemp.length - 1;
@@ -203,6 +203,7 @@
                                     dotsList[i].z =dotsListTemp[i].z;
 								}
 							}
+							// 画齿轮的图
                             initAnimate(dotsListTemp);
                         };
                     };
@@ -216,7 +217,7 @@
             imgObj3.onload = function () {
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.drawImage(imgObj3, canvas.width - imgObj3.width * 2 / 1.3, canvas.height - imgObj3.height * 2 / 1.3, imgObj3.width * 2 / 1.3, imgObj3.height * 2 / 1.3);
-                DotsList.push(getimgData(4));
+                DotsList.push(getimgData(5));
                 animateToImg(dotsList);
             };
 		}
@@ -225,16 +226,20 @@
 
             // dotsList 单独的 DotsList 全部的 dotsListTemp page1 3张图
 			// 将要变成的图
-			var dotsTmp = DotsList[Dotsindex];
+            var dotsTmp;
+			if(Dotsindex === 1){
+                dotsTmp = DotsList[0].concat(DotsList[1], DotsList[2]);
+			} else{
+                dotsTmp = DotsList[Dotsindex]
+			}
             var TempL = dotsTmp.length - 1;
             var dotListL = dotsList.length;
-            console.log(DotsList, dotsTmp, 'dotsList0');
             for (var i = 0; i < dotListL; i++ ) {
                 if (!dotsTmp[i]) {
                     var b = i % TempL;
                     dotsList[i].dx = dotsTmp[b].x;
                     dotsList[i].dy = dotsTmp[b].y;
-                    dotsList[i].dz =dotsTmp[b].z;
+                    dotsList[i].dz = dotsTmp[b].z;
                 } else {
                     dotsList[i].dx = dotsTmp[i].x;
                     dotsList[i].dy = dotsTmp[i].y;
@@ -242,7 +247,6 @@
                 }
             }
             //dotsList的xyz成为building的的 dx dy是瓶子的
-            console.log(dotsList);
             animateToImg(dotsList);
         }
         function getimgData(distance) {
@@ -272,8 +276,8 @@
                         //dotsList的xyz成为building的的 dx dy是building的
                     } else {
                         console.log(DotsList,dotsList, 'dotsList0');
-                        animateToImg(dotsList);
-//                        changeToImg(3);
+//                        animateToImg(dotsList);
+                        changeToImg(3);
                     }
                     break;
 				case 'page_3':
