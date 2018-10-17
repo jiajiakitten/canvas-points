@@ -211,10 +211,10 @@
 
         }
         function LoadedImgPage3() {
-            context.clearRect(0, 0, canvas.width, canvas.height);
             var imgObj3 = new Image();
             imgObj3.src = "./image/3/1.png";
             imgObj3.onload = function () {
+                context.clearRect(0, 0, canvas.width, canvas.height);
                 context.drawImage(imgObj3, canvas.width - imgObj3.width * 2 / 1.3, canvas.height - imgObj3.height * 2 / 1.3, imgObj3.width * 2 / 1.3, imgObj3.height * 2 / 1.3);
                 DotsList.push(getimgData(4));
                 animateToImg(dotsList);
@@ -228,7 +228,7 @@
 			var dotsTmp = DotsList[Dotsindex];
             var TempL = dotsTmp.length - 1;
             var dotListL = dotsList.length;
-            console.log(dotsList, 'dotsList0');
+            console.log(DotsList, dotsTmp, 'dotsList0');
             for (var i = 0; i < dotListL; i++ ) {
                 if (!dotsTmp[i]) {
                     var b = i % TempL;
@@ -263,12 +263,18 @@
         function changePic(e) {
 			switch (e) {
 				case 'page_1':
+                    changeToImg(1);
 					break;
 				case 'page_2':
-				    if(DotsList.length < 5) LoadedImgPage3();
-				    //dotsList的xyz成为齿轮的的 dx dy是bbuilding的
-
-                    //dotsList的xyz成为building的的 dx dy是building的
+				    if(DotsList.length < 5) {
+                        //dotsList的xyz成为齿轮的的 dx dy是bbuilding的
+                        LoadedImgPage3();
+                        //dotsList的xyz成为building的的 dx dy是building的
+                    } else {
+                        console.log(DotsList,dotsList, 'dotsList0');
+                        animateToImg(dotsList);
+//                        changeToImg(3);
+                    }
                     break;
 				case 'page_3':
                     changeToImg(4);
@@ -293,15 +299,16 @@
              var thisTime = +new Date();
 			 var lastTime;
 			 var flag = true;
-			 context.clearRect(0, 0, canvas.width, canvas.height);
+             console.log(dots[1].dx - dots[1].x, dots[1].dy - dots[1].y, dots[1].dz - dots[1].z);
+             context.clearRect(0, 0, canvas.width, canvas.height);
 			 dots.forEach(function() {
-				 var dot = this;
+                 var dot = this;
 				 if (Math.abs(dot.dx - dot.x) < 0.1 && Math.abs(dot.dy - dot.y) < 0.1 && Math.abs(dot.dz - dot.z) < 0.1) {
 					 // 已经变成图片
 					 dot.x = dot.dx;
 					 dot.y = dot.dy;
 					 dot.z = dot.dz;
-                     flag = false;
+//                     flag = false;
 				 } else {
 					 // 正在变成图片
 					 dot.x = dot.x + (dot.dx - dot.x) * 0.1;
@@ -311,7 +318,7 @@
 				 }
 				 dot.paint();
 			 });
-
+             console.log(thisTime - lastTime <= 300, flag, thisTime,lastTime );
 			 // 超过300ms变成图片, 变成false
 			 if (thisTime - lastTime <= 300 && flag) {
 				 if ("requestAnimationFrame" in window) {
